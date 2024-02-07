@@ -1,7 +1,5 @@
 import Cart from '../service/cart';
-import Book from '../domain/book';
 import Movie from '../domain/movie';
-import MusicAlbum from '../domain/musicAlbum';
 
 const cart = new Cart();
 const movie1 = new Movie(250, "August Rush", 2007,
@@ -23,14 +21,12 @@ test('add cart Movies', () => {
     expect(cart.items.length).toBe(2);
 });
 
-test('getItems', ()=> {
-    cart.add(movie1);
-    cart.add(movie2);
+test('getItems', () => {
 
     const res = [
         {
             id: 250,
-            name: 'August Rush',
+            title: 'August Rush',
             year: 2007,
             country: ['США', 'Южная Корея'],
             slogan: 'Невероятное путешествие со скоростью звука',
@@ -40,9 +36,9 @@ test('getItems', ()=> {
         },
         {
             id: 318,
-            name: 'Song for a Raggy Boy',
+            title: 'Song for a Raggy Boy',
             year: 2003,
-            country: ['США', 'Южная Корея'],
+            country: ['Ирландия', 'Дания', 'Великобритания', 'Испания'],
             slogan: 'В доме Господа они нашли...Ад',
             genres: ['Драма'],
             time: '94 минуты',
@@ -55,16 +51,11 @@ test('getItems', ()=> {
 });
 
 test('calculatePrice', () => {
-    cart.add(movie1);
-    cart.add(movie2);
-
     const sum = cart.calculatePrice();
     expect(sum).toBe(800);
 });
 
 test('discountedPrice', () => {
-    cart.add(movie1);
-    cart.add(movie2);
     const discountPrise = cart.discountedPrice(10);
     expect(discountPrise).toBe(720);
 });
@@ -73,7 +64,7 @@ test('delete Element', () => {
     const res = [
         {
             id: 250,
-            name: 'August Rush',
+            title: 'August Rush',
             year: 2007,
             country: ['США', 'Южная Корея'],
             slogan: 'Невероятное путешествие со скоростью звука',
